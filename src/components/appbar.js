@@ -16,11 +16,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail'
 
 import Header from './header'
 
@@ -33,25 +30,29 @@ const styles = theme => ({
     container: {
         display: 'flex',
     },
-    link: {
-        textDecoration: 'none',
-    },
-    brandName: {
-        padding: theme.spacing.unit,
-        flexGrow: '12',
-    },
-    navMenuText: {
-        textAligin: 'center',
-        align: 'right',
-        color: theme.palette.common.black,
-        flexGrow: '1 0 auto',
-        margin: theme.spacing.unit,
-    },
     drawer: {
         [theme.breakpoints.up('sm')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
+    },
+    drawerItems: {
+        textAligin: 'center',
+        align: 'center',
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    hide: {
+        display: 'none',
+    },
+    link: {
+        textDecoration: 'none',
+    },
+    list: {
+        width: '100%',
+        maxWidth: drawerWidth,
+        backgroundColor: theme.palette.background.paper,
     },
     menuButton: {
         marginRight: 20,
@@ -59,17 +60,21 @@ const styles = theme => ({
             display: 'none',
         },
     },
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    hide: {
-        display: 'none',
-    },
-    drawerItems: {
+    navLink: {
         textAligin: 'center',
-        align: 'center',
+        align: 'right',
+        color: theme.palette.common.black,
+        flexGrow: '1 0 auto',
+        margin: theme.spacing.unit,
     },
+    title: {
+        padding: theme.spacing.unit,
+        flexGrow: '12',
+        [theme.breakpoints.up('sm')]: {
+            fontSize: 12,
+        }
+    },
+    toolbar: theme.mixins.toolbar,
 });
 
 class SimpleAppBar extends React.Component {
@@ -88,32 +93,29 @@ class SimpleAppBar extends React.Component {
         const { open } = this.state;
         console.log(this.state)
 
-        const drawer = (
-            <div>
-                {/* <div className={classes.toolbar} /> */}
-                <Divider />
-                <List>
-                    {[ 'Home', 'Events', 'Contact' ].map((text, index) => ( <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>))}
-                </List>
-            </div>
-        );
+        const drawer = <div>
+            <Link to="page-2" className={ classes.link }>
+              <List component="nav" className={ classes.list}>
+                {['Home', 'Events', 'Contact'].map((text) => (
+                  <ListItem alignItems="center" button divider key={text}>
+                    <ListItemText primary={text} />
+                    <Divider />
+                  </ListItem>
+                ))}
+              </List>
+            </Link>
+          </div>
 
         return <div className={classes.root}>
             <CssBasline />
-            <AppBar position="static" color="default" elevation="0" className={classNames(
-                classes.appBar,
-                { [classes.appBarShift]: open }
-              )}>
+            <AppBar position="static" color="default" elevation="0">
               <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" className={classes.brandName} noWrap>
+                <Typography variant="" className={ classes.title }>
                   <Link className={classes.link}>
-                    <Header />
+                        <Header />
                   </Link>
                 </Typography>
                 <div className={classes.grow} />
@@ -121,17 +123,17 @@ class SimpleAppBar extends React.Component {
                   <div className={classes.container}>
                     <Hidden xsDown>
                       <Link className={classes.link}>
-                        <h4 className={classes.navMenuText}>Home</h4>
+                        <h4 className={classes.navLink}>Home</h4>
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
                       <Link className={classes.link}>
-                        <h4 className={classes.navMenuText}>Events</h4>
+                        <h4 className={classes.navLink}>Events</h4>
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
                       <Link className={classes.link}>
-                        <h4 className={classes.navMenuText}>Contact</h4>
+                        <h4 className={classes.navLink}>Contact</h4>
                       </Link>
                     </Hidden>
                   </div>
