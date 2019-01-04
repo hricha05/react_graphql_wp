@@ -92,7 +92,6 @@ module.exports = {
         ],
         // Blacklisted routes using glob patterns
         excludedRoutes: ['/*/*/posts/1456'],
-        },
       },
     },
   ],
