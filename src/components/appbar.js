@@ -108,35 +108,36 @@ class SimpleAppBar extends React.Component {
 
         return <div className={classes.root}>
             <CssBasline />
-            <AppBar position="static" color="default" elevation="0">
+            <AppBar position="static" color="default" elevation={0}>
               <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
                 </IconButton>
-                <Typography variant="" className={ classes.title }>
-                  <Link className={classes.link}>
+                <Typography className={ classes.title }>
+                  {/* <Link to="/" className={classes.link}> */}
                         <Header />
-                  </Link>
+                  {/* </Link> */}
                 </Typography>
                 <div className={classes.grow} />
-                <Typography>
-                  <div className={classes.container}>
+                    <Typography className={classes.container}>  
                     <Hidden xsDown>
-                      <Link className={classes.link}>
-                        <h4 className={classes.navLink}>Home</h4>
+                      <Link to="/" className={classes.link}>
+                        {/* <p className={classes.navLink}>Home</p> */}
+                        Home
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link className={classes.link}>
-                        <h4 className={classes.navLink}>Events</h4>
+                      <Link to="/page-2/" className={classes.link}>
+                        {/* <p className={classes.navLink}>Events</p> */}
+                        Events
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link className={classes.link}>
-                        <h4 className={classes.navLink}>Contact</h4>
+                      <Link to="/" className={classes.link}>
+                        {/* <p className={classes.navLink}>Contact</p> */}
+                        Contacts
                       </Link>
-                    </Hidden>
-                  </div>
+                    </Hidden>         
                 </Typography>
               </Toolbar>
             </AppBar>
@@ -163,7 +164,7 @@ class SimpleAppBar extends React.Component {
 SimpleAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
     width: PropTypes.string.isRequired,
-    theme: PropTypes.object.isRequired,
+    // theme: PropTypes.object.isRequired,
 };
 
 export default compose(withStyles(styles, { withTheme: true }), withWidth(),)(SimpleAppBar);
