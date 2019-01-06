@@ -94,12 +94,12 @@ class SimpleAppBar extends React.Component {
         console.log(this.state)
 
         const drawer = <div>
-            <Link to="page-2" className={ classes.link }>
+            <Link to="/" className={ classes.link }>
               <List component="nav" className={ classes.list}>
                 {['Home', 'Events', 'Contact'].map((text) => (
                   <ListItem alignItems="center" button divider key={text}>
                     <ListItemText primary={text} />
-                    <Divider />
+                    <Divider light="true" />
                   </ListItem>
                 ))}
               </List>
@@ -114,7 +114,7 @@ class SimpleAppBar extends React.Component {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="" className={ classes.title }>
-                  <Link className={classes.link}>
+                        <Link to="/" className={classes.link}>
                         <Header />
                   </Link>
                 </Typography>
@@ -122,12 +122,12 @@ class SimpleAppBar extends React.Component {
                 <Typography>
                   <div className={classes.container}>
                     <Hidden xsDown>
-                      <Link className={classes.link}>
+                      <Link to="/" className={classes.link}>
                         <h4 className={classes.navLink}>Home</h4>
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link className={classes.link}>
+                      <Link to="page-2" className={classes.link}>
                         <h4 className={classes.navLink}>Events</h4>
                       </Link>
                     </Hidden>
@@ -155,7 +155,7 @@ class SimpleAppBar extends React.Component {
                   </IconButton>
                   {drawer}
                 </nav>
-              </Drawer>
+            </Drawer>
           </div>
     }
 }
