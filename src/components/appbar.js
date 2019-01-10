@@ -24,58 +24,56 @@ import Header from './header'
 const drawerWidth= 425;
 
 const styles = theme => ({
-    root: {
-        display: 'flex',
+  root: {
+    display: 'flex',
+  },
+  container: {
+    display: 'flex',
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
     },
-    container: {
-        display: 'flex',
+  },
+  drawerItems: {
+    textAligin: 'center',
+    align: 'center',
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  hide: {
+    display: 'none',
+  },
+  list: {
+    width: '100%',
+    maxWidth: drawerWidth,
+    backgroundColor: theme.palette.background.paper,
+  },
+  menuButton: {
+    marginRight: 20,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
     },
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
-            flexShrink: 0,
-        },
+  },
+  navLink: {
+    textAligin: 'center',
+    align: 'right',
+    flexGrow: '1 0 auto',
+    textDecoration: 'none',
+    margin: theme.spacing.unit,
+    color: theme.palette.common.black,
+  },
+  title: {
+    padding: theme.spacing.unit,
+    flexGrow: '12',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 'small',
     },
-    drawerItems: {
-        textAligin: 'center',
-        align: 'center',
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    hide: {
-        display: 'none',
-    },
-    link: {
-        textDecoration: 'none',
-    },
-    list: {
-        width: '100%',
-        maxWidth: drawerWidth,
-        backgroundColor: theme.palette.background.paper,
-    },
-    menuButton: {
-        marginRight: 20,
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
-    },
-    navLink: {
-        textAligin: 'center',
-        align: 'right',
-        color: theme.palette.common.black,
-        flexGrow: '1 0 auto',
-        margin: theme.spacing.unit,
-    },
-    title: {
-        padding: theme.spacing.unit,
-        flexGrow: '12',
-        [theme.breakpoints.up('sm')]: {
-            fontSize: 12,
-        }
-    },
-    toolbar: theme.mixins.toolbar,
-});
+  },
+  toolbar: theme.mixins.toolbar,
+})
 
 class SimpleAppBar extends React.Component {
     state = {
@@ -113,27 +111,27 @@ class SimpleAppBar extends React.Component {
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
                 </IconButton>
-                <Typography className={ classes.title }>
+                <Typography variant="h1" className={ classes.title }>
                   {/* <Link to="/" className={classes.link}> */}
-                        <Header />
+                        <Header className={classes.title}/>
                   {/* </Link> */}
                 </Typography>
                 <div className={classes.grow} />
                     <Typography className={classes.container}>  
                     <Hidden xsDown>
-                      <Link to="/" className={classes.link}>
+                      <Link to="/" className={classes.navLink}>
                         {/* <p className={classes.navLink}>Home</p> */}
                         Home
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link to="/page-2/" className={classes.link}>
+                      <Link to="/page-2/" className={classes.navLink}>
                         {/* <p className={classes.navLink}>Events</p> */}
                         Events
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link to="/" className={classes.link}>
+                      <Link to="/" className={classes.navLink}>
                         {/* <p className={classes.navLink}>Contact</p> */}
                         Contacts
                       </Link>
