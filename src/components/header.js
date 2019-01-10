@@ -7,6 +7,7 @@ const Header = ({ data }) => (
     <Link to="/" 
           style={{ 
             color: `black`,
+            fontSize: 'x-large',
             textDecoration: `none`, 
           }
     }>
