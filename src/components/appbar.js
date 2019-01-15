@@ -125,7 +125,7 @@ class SimpleAppBar extends React.Component {
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link to="/page-2/" className={classes.navLink}>
+                      <Link to="/post/hello-world" className={classes.navLink}>
                         {/* <p className={classes.navLink}>Events</p> */}
                         Events
                       </Link>
