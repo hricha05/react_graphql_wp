@@ -9,8 +9,13 @@ class PostTemplate extends Component {
 
     return <Layout>
         <div>
-          <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div style={{
+            margin: 15,
+            padding: 10,
+          }}>
+            <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          </div>
         </div>
       </Layout>
   }
