@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Layout from "../components/layout";
 
 class PageTemplate extends Component {
     render() {
@@ -7,15 +8,15 @@ class PageTemplate extends Component {
 
         console.log(currentPage)
 
-        return (
+        return <Layout>
             <div>
-                <h1 dangerouslySetInnerHTML={{ __html: currentPage.title }} />
-                <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
+              <h1 dangerouslySetInnerHTML={{ __html: currentPage.title }} />
+              <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
 
-                <p dangerouslySetInnerHTML={{ __html: currentPage.date }} />
-                <p dangerouslySetInnerHTML={{ __html: currentPage.slug }} />
+              <p dangerouslySetInnerHTML={{ __html: currentPage.date }} />
+              <p dangerouslySetInnerHTML={{ __html: currentPage.slug }} />
             </div>
-        )
+          </Layout>
     }
 }
 
