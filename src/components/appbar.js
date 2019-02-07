@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby'
-
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles';
 import { withWidth } from '@material-ui/core';
@@ -26,6 +25,7 @@ const drawerWidth= 425;
 const styles = theme => ({
   root: {
     display: 'flex',
+    borderBottom: '1 solid black',
   },
   container: {
     display: 'flex',
@@ -86,10 +86,10 @@ class SimpleAppBar extends React.Component {
 
     render () {
         const { classes } = this.props;
-        console.log(this.props);
+        // console.log(this.props);
 
         const { open } = this.state;
-        console.log(this.state)
+        // console.log(this.state)
 
         const drawer = <div>
             <Link to="page-2" className={ classes.link }>
@@ -106,7 +106,7 @@ class SimpleAppBar extends React.Component {
 
         return <div className={classes.root}>
             <CssBasline />
-            <AppBar position="static" color="default" elevation={0}>
+          <AppBar position="fixed" color="default" elevation={0} style={{ backgroundColor: '#FFFFFF', opacity: 0.5,}}>
               <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
@@ -125,7 +125,7 @@ class SimpleAppBar extends React.Component {
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link to="/post/hello-world" className={classes.navLink}>
+                      <Link to="/posts/" className={classes.navLink}>
                         {/* <p className={classes.navLink}>Events</p> */}
                         Events
                       </Link>
