@@ -35,8 +35,8 @@ const postsQuery = `
 `
 
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-    const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+    const { createPage } = actions;
     console.log(createPage);
 
 
@@ -64,6 +64,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 });
             })
 
+            // Posts
+
             .then(() => {
                 graphql(postsQuery)
                     .then(result => {
@@ -73,6 +75,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                         }
                         const postTemplate = path.resolve("./src/templates/post.js");
                         console.log(postTemplate);
+
+                        const postsTemplate = path.resolve('./src/templates/posts.js')
+
+                        // Create Posts
+
+                        createPage({
+                            path: `/posts/`,
+                            component: slash(postsTemplate), 
+                        });
 
                         _.each(result.data.allWordpressPost.edges, edge => {
                             createPage({
