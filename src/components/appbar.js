@@ -17,8 +17,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 import Header from './header'
+import theme from './theme'
 
 const drawerWidth= 425;
 
@@ -106,7 +108,8 @@ class SimpleAppBar extends React.Component {
 
         return <div className={classes.root}>
             <CssBasline />
-          <AppBar position="fixed" color="default" elevation={0} style={{ backgroundColor: '#FFFFFF', opacity: 0.5,}}>
+            <MuiThemeProvider theme={theme} >
+          <AppBar position="fixed" color="primary" elevation={0} style={{}}>
               <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
@@ -139,6 +142,7 @@ class SimpleAppBar extends React.Component {
                 </Typography>
               </Toolbar>
             </AppBar>
+          </MuiThemeProvider>
             <Drawer 
                 anchor="top" 
                 open={open} 
