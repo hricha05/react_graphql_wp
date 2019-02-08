@@ -1,38 +1,86 @@
 import React, { Component } from "react"
 import Link from "gatsby-link"
 import PropTypes from "prop-types"
+import { Card, CardHeader, CardContent, CardActionArea, Divider, Typography } from "@material-ui/core"
+import Grid from '@material-ui/core/Grid'
+import { withStyles } from "@material-ui/core/styles"
+
+import Layout from '../components/layout'
+
+const styles = {
+  root: {
+    marginTop: 50,
+    padding: 0,
+    // borderTop: '0.5px solid black'
+  },
+  posts: {
+    // marginBottom: 50,
+    // marginLeft: 20,
+    // marginRight: 20,
+    // marginTop: 10,
+    margin: '10px auto',
+    padding: 50,
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  },
+}
 
 class PostsTemplate extends Component {
     render() {
         const data = this.props.data
+        const {classes} = this.props
 
-        return (
-            <div>
-                <h1>Posts</h1>
-
+        return <Layout>
+            <div className={classes.root}>
+              <Typography component="h1" variant="h2" align='center'>
+                Events
+              </Typography>
+              <Divider component="hr" variant="fullWidth" />
+              <Grid container={true} alignContent="space-around" alignItems="center" spacing={24}>
                 {data.allWordpressPost.edges.map(({ node }) => (
-                    <div key={node.slug} className={"post"} style={{ marginBottom: 50 }}>
-                        <Link to={'post/' + node.slug}>
-                            <h3>{node.title}</h3>
+                  <Grid
+                    key={node.slug}
+                    className={classes.posts}
+                    item
+                    md={4}
+                    zeroMinWidth
+                  >
+                    <Card
+                      raised={true}
+                      square={true}
+                      className={classes.card}
+                    >
+                      <CardActionArea>
+                        <Link
+                          to={'post/' + node.slug}
+                          // className={classes.link}
+                        >
+                          <CardHeader title={node.title} />
                         </Link>
-
-                        <div className={"post-content"} dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-
-                        {node.date}
-                    </div>
+                        <CardContent
+                          dangerouslySetInnerHTML={{
+                            __html: node.excerpt,
+                          }}
+                        />
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
                 ))}
-
+              </Grid>
             </div>
-        )
+          </Layout>
     }
 }
 
 PostsTemplate.propTypes = {
+    classes: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     edges: PropTypes.array,
 }
 
-export default PostsTemplate
+export default withStyles(styles)(PostsTemplate)
 
 export const pageQuery = graphql`
     query postsQuery{
@@ -43,7 +91,6 @@ export const pageQuery = graphql`
                     title
                     excerpt
                     slug
-                    date(formatString: "MMMM DD, YYYY")
                 }
             }
         }
