@@ -54,9 +54,7 @@ class PostsTemplate extends Component {
                     >
                       <CardActionArea>
                         <Link
-                          to={'post/' + node.slug}
-                          // className={classes.link}
-                        >
+                          to={'post/' + node.slug}>
                           <CardHeader title={node.title} />
                         </Link>
                         <CardContent
