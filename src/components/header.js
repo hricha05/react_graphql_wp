@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 const Header = ({ data }) => (
-  <div>
-    <div>
-      <h2 style={{ margin: 0 }}>
-        <Link to="/" style={{ color: `black`, textDecoration: `none`, }}>
-          {data.site.siteMetadata.title}
-        </Link>
-      </h2>
-    </div>
-  </div>
+    <Link to="/" 
+          style={{ 
+            color: `black`,
+            fontSize: 'x-large',
+            textDecoration: `none`, 
+          }
+    }>
+      {data.site.siteMetadata.title}
+    </Link>
 )
 
 export default props => (
@@ -26,7 +26,9 @@ export default props => (
         }
       }
     `}
-    render={data => <Header data={data} {...props} />}
+    render={data => (
+        <Header data={data} {...props} />
+    )}
   />
 )
 

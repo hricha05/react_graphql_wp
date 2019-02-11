@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby'
-
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles';
 import { withWidth } from '@material-ui/core';
@@ -18,64 +17,65 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 import Header from './header'
+import theme from './theme'
 
 const drawerWidth= 425;
 
 const styles = theme => ({
-    root: {
-        display: 'flex',
+  root: {
+    display: 'flex',
+    borderBottom: '1 solid black',
+  },
+  container: {
+    display: 'flex',
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
     },
-    container: {
-        display: 'flex',
+  },
+  drawerItems: {
+    textAligin: 'center',
+    align: 'center',
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  hide: {
+    display: 'none',
+  },
+  list: {
+    width: '100%',
+    maxWidth: drawerWidth,
+    backgroundColor: theme.palette.background.paper,
+  },
+  menuButton: {
+    marginRight: 20,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
     },
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
-            flexShrink: 0,
-        },
+  },
+  navLink: {
+    textAligin: 'center',
+    align: 'right',
+    flexGrow: '1 0 auto',
+    textDecoration: 'none',
+    margin: theme.spacing.unit,
+    color: theme.palette.common.black,
+  },
+  title: {
+    padding: theme.spacing.unit,
+    flexGrow: '12',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 'small',
     },
-    drawerItems: {
-        textAligin: 'center',
-        align: 'center',
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    hide: {
-        display: 'none',
-    },
-    link: {
-        textDecoration: 'none',
-    },
-    list: {
-        width: '100%',
-        maxWidth: drawerWidth,
-        backgroundColor: theme.palette.background.paper,
-    },
-    menuButton: {
-        marginRight: 20,
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
-    },
-    navLink: {
-        textAligin: 'center',
-        align: 'right',
-        color: theme.palette.common.black,
-        flexGrow: '1 0 auto',
-        margin: theme.spacing.unit,
-    },
-    title: {
-        padding: theme.spacing.unit,
-        flexGrow: '12',
-        [theme.breakpoints.up('sm')]: {
-            fontSize: 12,
-        }
-    },
-    toolbar: theme.mixins.toolbar,
-});
+  },
+  toolbar: theme.mixins.toolbar,
+})
 
 class SimpleAppBar extends React.Component {
     state = {
@@ -88,18 +88,18 @@ class SimpleAppBar extends React.Component {
 
     render () {
         const { classes } = this.props;
-        console.log(this.props);
+        // console.log(this.props);
 
         const { open } = this.state;
-        console.log(this.state)
+        // console.log(this.state)
 
         const drawer = <div>
-            <Link to="/" className={ classes.link }>
+            <Link to="page-2" className={ classes.link }>
               <List component="nav" className={ classes.list}>
                 {['Home', 'Events', 'Contact'].map((text) => (
                   <ListItem alignItems="center" button divider key={text}>
                     <ListItemText primary={text} />
-                    <Divider light="true" />
+                    <Divider />
                   </ListItem>
                 ))}
               </List>
@@ -108,38 +108,41 @@ class SimpleAppBar extends React.Component {
 
         return <div className={classes.root}>
             <CssBasline />
-            <AppBar position="static" color="default" elevation="0">
+            <MuiThemeProvider theme={theme} >
+          <AppBar position="fixed" color="primary" elevation={0} style={{}}>
               <Toolbar>
                 <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerToggle} className={classNames(classes.menuButton, open && classes.hide)}>
                   <MenuIcon />
                 </IconButton>
-                <Typography variant="" className={ classes.title }>
-                        <Link to="/" className={classes.link}>
-                        <Header />
-                  </Link>
+                <Typography variant="h1" className={ classes.title }>
+                  {/* <Link to="/" className={classes.link}> */}
+                        <Header className={classes.title}/>
+                  {/* </Link> */}
                 </Typography>
                 <div className={classes.grow} />
-                <Typography>
-                  <div className={classes.container}>
+                    <Typography className={classes.container}>  
                     <Hidden xsDown>
-                      <Link to="/" className={classes.link}>
-                        <h4 className={classes.navLink}>Home</h4>
+                      <Link to="/" className={classes.navLink}>
+                        {/* <p className={classes.navLink}>Home</p> */}
+                        Home
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link to="page-2" className={classes.link}>
-                        <h4 className={classes.navLink}>Events</h4>
+                      <Link to="/posts/" className={classes.navLink}>
+                        {/* <p className={classes.navLink}>Events</p> */}
+                        Events
                       </Link>
                     </Hidden>
                     <Hidden xsDown>
-                      <Link className={classes.link}>
-                        <h4 className={classes.navLink}>Contact</h4>
+                      <Link to="/" className={classes.navLink}>
+                        {/* <p className={classes.navLink}>Contact</p> */}
+                        Contacts
                       </Link>
-                    </Hidden>
-                  </div>
+                    </Hidden>         
                 </Typography>
               </Toolbar>
             </AppBar>
+          </MuiThemeProvider>
             <Drawer 
                 anchor="top" 
                 open={open} 
@@ -155,7 +158,7 @@ class SimpleAppBar extends React.Component {
                   </IconButton>
                   {drawer}
                 </nav>
-            </Drawer>
+              </Drawer>
           </div>
     }
 }
@@ -163,7 +166,7 @@ class SimpleAppBar extends React.Component {
 SimpleAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
     width: PropTypes.string.isRequired,
-    theme: PropTypes.object.isRequired,
+    // theme: PropTypes.object.isRequired,
 };
 
 export default compose(withStyles(styles, { withTheme: true }), withWidth(),)(SimpleAppBar);
